@@ -6,6 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
@@ -22,20 +23,23 @@ public abstract class Mybatis3Dao<E, PK extends Serializable> implements IEntity
     protected final Log log = LogFactory.getLog(getClass());
 
     
+//    @Autowired
+//	private MyBatisDaoSupport myBatisDaoSupport;
+
     @Autowired
-	private MyBatisDaoSupport myBatisDaoSupport;
+    private SqlSessionFactory sqlSessionFactory;
 
 
 
-    public void setMyBatisDaoSupport(MyBatisDaoSupport myBatisDaoSupport) {
-		this.myBatisDaoSupport = myBatisDaoSupport;
-	}
+//    public void setMyBatisDaoSupport(MyBatisDaoSupport myBatisDaoSupport) {
+//		this.myBatisDaoSupport = myBatisDaoSupport;
+//	}
 
 	/**
 	 * 功能描述：返回 SqlSession 的方式
 	 */
 	protected SqlSession getSqlSession() {
-		return this.myBatisDaoSupport.getSqlSession();
+		return this.sqlSessionFactory.openSession();
 	}
 
 
@@ -224,7 +228,7 @@ public abstract class Mybatis3Dao<E, PK extends Serializable> implements IEntity
     
     @SuppressWarnings({ "rawtypes", "unused", "unchecked" })
     private Page pageQueryNoLimitNoCount(SqlSession sqlSession, String statementName, String countStatementName,
-                                               PageRequest pageRequest) {
+                                         PageRequest pageRequest) {
 
         if(pageRequest.getPageSize()<=0){
             pageRequest.setPageSize(10);

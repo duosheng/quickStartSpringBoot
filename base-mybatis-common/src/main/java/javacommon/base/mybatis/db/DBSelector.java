@@ -6,6 +6,7 @@ import javacommon.base.mybatis.paging.dialetc.MySqlDialect;
 import javacommon.base.mybatis.utils.SpringHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -19,6 +20,7 @@ import java.util.Map;
  * @author xuyuli
  * 
  */
+@Service
 public class DBSelector extends SpringHolder {
 	private String dbType;
 

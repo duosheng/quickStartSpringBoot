@@ -5,7 +5,9 @@ import javacommon.base.mybatis.db.DBType;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.mapping.*;
 import org.apache.ibatis.mapping.MappedStatement.Builder;
+import org.apache.ibatis.reflection.DefaultReflectorFactory;
 import org.apache.ibatis.reflection.MetaObject;
+import org.apache.ibatis.reflection.ReflectorFactory;
 import org.apache.ibatis.reflection.factory.DefaultObjectFactory;
 import org.apache.ibatis.reflection.factory.ObjectFactory;
 import org.apache.ibatis.reflection.property.PropertyTokenizer;
@@ -22,6 +24,19 @@ import java.util.List;
  * 
  */
 public class MybatisUtils {
+
+	/**
+	 * 默认ObjectFactory
+	 */
+	public static final ObjectFactory DEFAULT_OBJECT_FACTORY = new DefaultObjectFactory();
+	/**
+	 * 默认ObjectWrapperFactory
+	 */
+	public static final ObjectWrapperFactory DEFAULT_OBJECT_WRAPPER_FACTORY = new DefaultObjectWrapperFactory();
+	/**
+	 * 默认ReflectorFactory
+	 */
+	public static final ReflectorFactory DEFAULT_REFLECTOR_FACTORY = new DefaultReflectorFactory();
 
 	/**
 	 * 复制一个BoundSql.
@@ -62,7 +77,7 @@ public class MybatisUtils {
 		// 根据IBatis3中配置的SQL和传进来的参数进行处理生成可在pl/sql中运行的SQL
 		if (parameterMappings != null) {
 			MetaObject metaObject = parameterObject == null ? null : MetaObject.forObject(parameterObject,
-					defaultObjectFactory, defaultObjectWrapperFactory);
+					defaultObjectFactory, defaultObjectWrapperFactory,DEFAULT_REFLECTOR_FACTORY);
 			for (int i = 0; i < parameterMappings.size(); i++) {
 				ParameterMapping parameterMapping = parameterMappings.get(i);
 				if (parameterMapping.getMode() != ParameterMode.OUT) {
@@ -80,7 +95,7 @@ public class MybatisUtils {
 							&& boundSql.hasAdditionalParameter(prop.getName())) {
 						value = boundSql.getAdditionalParameter(prop.getName());
 						if (value != null) {
-							value = MetaObject.forObject(value, defaultObjectFactory, defaultObjectWrapperFactory)
+							value = MetaObject.forObject(value, defaultObjectFactory, defaultObjectWrapperFactory,DEFAULT_REFLECTOR_FACTORY)
 									.getValue(propertyName.substring(prop.getName().length()));
 						}
 					} else {
