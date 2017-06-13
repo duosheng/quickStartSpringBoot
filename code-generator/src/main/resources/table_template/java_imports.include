@@ -1,0 +1,40 @@
+import java.util.*;
+import java.io.Serializable;
+
+import javacommon.base.*;
+import javacommon.util.*;
+
+
+import ${basepackage}.dao.model.*;
+import ${basepackage}.dao.*;
+import ${basepackage}.service.*;
+import ${basepackage}.dao.query.*;
+import com.soouya.common.util.UUIDUtils;
+
+import javacommon.base.EntityDao;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.transaction.annotation.Transactional;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
+import javax.validation.constraints.*;
+import org.hibernate.validator.constraints.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.opensymphony.xwork2.Preparable;
+import com.opensymphony.xwork2.ModelDriven;
+
+import com.soouya.common.util.ErrorUtil;
+import com.soouya.common.util.Code;
+
+import net.sf.json.JSONObject;

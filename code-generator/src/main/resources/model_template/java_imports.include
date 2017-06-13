@@ -1,0 +1,56 @@
+import java.util.*;
+import java.io.Serializable;
+
+import javacommon.base.BaseManager;
+import javacommon.base.EntityDao;
+import javacommon.util.SpringContextHolder;
+
+import javacommon.base.BaseMybatis3Dao;
+import javacommon.util.JsonDoc;
+
+
+import ${basepackage}.dao.model.*;
+import ${basepackage}.dao.*;
+import ${basepackage}.service.*;
+import ${basepackage}.service.bo.*;
+import ${basepackage}.dao.query.*;
+import com.soouya.common.util.UUIDUtils;
+
+import javacommon.base.EntityDao;
+import javacommon.base.BaseQuery;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.transaction.annotation.Transactional;
+
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import com.opensymphony.xwork2.Preparable;
+import com.opensymphony.xwork2.ModelDriven;
+
+import com.soouya.common.util.ErrorUtil;
+import com.soouya.common.util.Code;
+
+import net.sf.json.JSONObject;
+import com.soouya.common.model.Page;
+
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javacommon.base.bo.IBaseBoManager;
+import javacommon.base.bo.BaseBoManager;
+import com.soouya.common.exception.BusinessException;
+import javacommon.base.Mybatis3Dao;
+import javacommon.base.IEntityDao;
